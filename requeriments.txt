@@ -1,2 +1,8 @@
 flask == flask
 pytest == pytest
+python-dotenv == python-dotenv
+python-decouple == python-decouple
+psycopg2 == psycopg2
+mysql-connector-python == mysql-connector-python
+SQLALchemy == SQLALchemy
+alembic == alembic
