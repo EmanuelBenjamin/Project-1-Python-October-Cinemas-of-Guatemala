@@ -26,13 +26,13 @@ class UserModel():
         try:
             connection = get_conection()
             with connection.cursor() as cursor:
-                existing_user = """SELECT name, lastname, password, phone_number FROM users 
-                            WHERE password = '{}' """.format(users.password)
+                existing_user = """SELECT name, lastname, password, email, phone_number FROM users 
+                            WHERE email = '{}' """.format(users.email)
                 cursor.execute(existing_user)
                 row = cursor.fetchone()
                 if row == None:
-                    cursor.execute("""INSERT INTO users (name, lastname, password, phone_number) 
-                            VALUES (%s, %s, %s, %s)""".format(users.name, users.lastname, users.password, users.phone_number))
+                    cursor.execute("""INSERT INTO users (name, lastname, password, email, phone_number) 
+                            VALUES (%s, %s, %s, %s, %s)""".format(users.email),(users.name, users.lastname, users.password, users.email, users.phone_number))
                     affected_row = cursor.rowcount
                     connection.commit()
                 else:
@@ -52,9 +52,7 @@ class Login():
                 cursor.execute(existing_user)
                 row = cursor.fetchone()
                 if row != None:
-                    url = 'http://127.0.0.1:5000/login'
-                    headers = {'Authorization': users.password}
-                    requests.get(url, headers=headers)
+                   
                     affected_row = cursor.rowcount
                 else:
                     return None

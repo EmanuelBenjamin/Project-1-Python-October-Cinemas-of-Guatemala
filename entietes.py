@@ -18,12 +18,12 @@ class Movie():
         
 
 class User():
-    def __init__(self, id, name = None, lastname=None, password=None, phone_number=None,):
+    def __init__(self, id, name = None, lastname=None, password=None, email=None, phone_number=None):
         self.id = id
         self.name = name
         self.lastname = lastname
         self.password = password
-        #self.email = email
+        self.email = email
         self.phone_number = phone_number
         
 
