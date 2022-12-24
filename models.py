@@ -41,22 +41,39 @@ class UserModel():
             return affected_row
         except Exception as ex:
             raise Exception(ex)
-class Login():
+class LoginModel():
     @classmethod
-    def login(self, users):
+    def verify_email(self, users):
         try:
-            connection = get_connection()
+            connection = get_conection()
             with connection.cursor() as cursor:
                 existing_user = """SELECT name, lastname, password, email, phone_number FROM users 
-                            WHERE password = '{}', email = '{}'""".format(users.password, users.email)
+                            WHERE email = '{}'""".format(users.email)
                 cursor.execute(existing_user)
                 row = cursor.fetchone()
                 if row != None:
-                   
-                    affected_row = cursor.rowcount
+                    affected_row1 = 1
                 else:
                     return None
             connection.close()
-            return affected_row
+            return affected_row1
+        except Exception as ex:
+            raise Exception(ex)
+
+    @classmethod
+    def verify_password(self, users):
+        try:
+            connection = get_conection()
+            with connection.cursor() as cursor:
+                existing_user = """SELECT name, lastname, password, email, phone_number FROM users 
+                            WHERE password = '{}'""".format(users.password)
+                cursor.execute(existing_user)
+                row = cursor.fetchone()
+                if row != None:
+                    affected_row2 = 1
+                else:
+                    return None
+            connection.close()
+            return affected_row2
         except Exception as ex:
             raise Exception(ex)
