@@ -62,9 +62,11 @@ class Ticket(Base):
     __tablename__ = 'tickets'
 
     id = Column(Integer, primary_key = True)
+    id_movie = Column(Integer, nullable = False)
     seat_number = Column(Integer, nullable = False)
-    movie_id = Column(Integer, ForeignKey('movies.id'))
-    movie = relationship('Movie', back_populates = 'ticket')
+    id_showtime = Column(Integer, nullable = False)
+    #movie_id = Column(Integer, ForeignKey('movies.id'))
+    #movie = relationship('Movie', back_populates = 'ticket')
 
     
 
