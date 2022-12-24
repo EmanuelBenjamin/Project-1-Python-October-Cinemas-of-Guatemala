@@ -27,10 +27,14 @@ class User():
         self.phone_number = phone_number
         
 
-class token():
-    def __init__(self, id_token, key_code= None, user_id=None, user=None, create_all=None):
-        self.id_token = id_token
-        self.key_code = key_code
-        self.user_id = user_id
-        self.user = user
-        self.create_all = create_all
+
+class Ticket():
+    def __init__(self, id, id_movie = None, seat_number = None, id_showtime = None):
+        self.id = id
+        self.id_movie = id_movie
+        self.seat_number = seat_number
+        self.id_showtime = Showtime
+        
+        
+        
+        
