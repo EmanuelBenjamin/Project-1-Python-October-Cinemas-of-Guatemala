@@ -83,15 +83,16 @@ class TicketModel():
         try:
             connection = get_conection()
             with connection.cursor() as cursor:
-                cursor.execute("SELECT id, id_movie, seat_number, id_showtime FROM tickets ORDER BY seat_number ASC")
+                cursor.execute("SELECT id_movie, seat_number, id_showtime FROM tickets ORDER BY seat_number ASC")
                 reserved = cursor.rowcount
-                if reserved<49:
+                if reserved<50: 
+                    search_number = """SELECT id_movie, seat_number, id_showtime FROM tickets WHERE seat_number ='{}'""".format(tickets.seat_number)
                     cursor.execute(search_number)
-                    search_number = """SELECT id, id_movie, seat_number, id_showtime FROM tickets WHERE seat_number ='{}'""".format(tickets.seat_number)
+                    
                     row = cursor.fetchone()
                     if row == None:
-                        cursor.execute("""INSERT INTO tickets(id, id_movie, seat_number, id_showtime)
-                                        VALUES (%s, %s, %s,) """.format(tickets.seat_number),(tickets.id_movie, tickets.seat_number, tickets.id_showtime))
+                        cursor.execute("""INSERT INTO tickets(id_movie, seat_number, id_showtime)
+                                        VALUES (%s, %s, %s) """.format(tickets.seat_number),(tickets.id_movie, tickets.seat_number, tickets.id_showtime))
                         affected_row = cursor.rowcount
                         connection.commit()
 

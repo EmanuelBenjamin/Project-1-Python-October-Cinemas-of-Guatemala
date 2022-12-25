@@ -68,16 +68,32 @@ def login():
         return jsonify({'message': str(ex)}), 500
 
 @buy_ticket_main.route('/',methods=['POST'])
-
-    
 def buy_ticket():
     try:
         id_movie = int(request.json['id_movie'])
         seat_number = int(request.json['seat_number'])
         id_showtime = int(request.json['id_showtime'])
-        ticket = Ticket("",id_movie, seat_number, id_showtime)
-        affected_row = TicketModel.add_ticket(ticket)
+
+        if seat_number>=1 and seat_number<=50:
+
+            ticket = Ticket("",id_movie, seat_number, id_showtime)
+            affected_row = TicketModel.add_ticket(ticket)
+
+        else:
+            return jsonify('Select a number from 1 to 50')
+
+        if affected_row == 0:
+            return jsonify('Selected seat not available')
+
+        elif affected_row == 1:
+            return jsonify('Successfully purchased ticket')
+
+        else:
+            return jsonify('Seats not available')
+
+
 
     except Exception as ex:
         return jsonify({'message': str (ex)}), 500
 
+                

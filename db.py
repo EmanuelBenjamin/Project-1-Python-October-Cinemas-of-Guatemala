@@ -65,8 +65,8 @@ class Ticket(Base):
     id_movie = Column(Integer, nullable = False)
     seat_number = Column(Integer, nullable = False)
     id_showtime = Column(Integer, nullable = False)
-    #movie_id = Column(Integer, ForeignKey('movies.id'))
-    #movie = relationship('Movie', back_populates = 'ticket')
+    movie_id = Column(Integer, ForeignKey('movies.id'))
+    movie = relationship('Movie', back_populates = 'ticket')
 
     
 

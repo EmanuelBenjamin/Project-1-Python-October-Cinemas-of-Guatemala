@@ -33,7 +33,7 @@ class Ticket():
         self.id = id
         self.id_movie = id_movie
         self.seat_number = seat_number
-        self.id_showtime = Showtime
+        self.id_showtime = id_showtime
         
         
         
