@@ -10,6 +10,7 @@ from entietes import Ticket
 from models import MovieModel
 from models import UserModel
 from models import LoginModel
+from models import TicketModel
 
 
 movies_main = Blueprint('movie_blueprint', __name__)
@@ -74,7 +75,9 @@ def buy_ticket():
         id_movie = int(request.json['id_movie'])
         seat_number = int(request.json['seat_number'])
         id_showtime = int(request.json['id_showtime'])
-        ticket = Ticket("",)
+        ticket = Ticket("",id_movie, seat_number, id_showtime)
+        affected_row = TicketModel.add_ticket(ticket)
+
     except Exception as ex:
         return jsonify({'message': str (ex)}), 500
 
