@@ -30,19 +30,10 @@ class User(Base):
    
 
     
-class token(Base):
-    __tablename__ = 'tokens'
-
-    id = Column(Integer, primary_key = True)
-    key_code = Column(String, nullable = False)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    user = relationship('Users', back_populates = 'tokens')
-    
-
 class Movie(Base):
-    __tablename__ = 'movies'
-    
-    id = Column(Integer, primary_key = True)
+    tablename = 'movies'
+
+    id= Column(Integer, primary_key = True)
     title = Column(String, nullable = False)
     url = Column(String, nullable = False)
     classification = Column(String, nullable = False)
@@ -50,16 +41,16 @@ class Movie(Base):
     ticket = relationship('Ticket', back_populates = 'movie')
 
 class Showtime(Base):
-    __tablename__ = 'showtimes'
+    tablename = 'showtimes'
 
     id = Column(Integer, primary_key = True)
     date = Column(String, nullable = False)
     movie_id = Column(Integer, ForeignKey('movies.id'))
     movie = relationship('Movie', back_populates = 'showtimes')
-
+    ticket = relationship('Ticket', back_populates = 'showtime')
 
 class Ticket(Base):
-    __tablename__ = 'tickets'
+    tablename = 'tickets'
 
     id = Column(Integer, primary_key = True)
     id_movie = Column(Integer, nullable = False)
@@ -67,6 +58,8 @@ class Ticket(Base):
     id_showtime = Column(Integer, nullable = False)
     movie_id = Column(Integer, ForeignKey('movies.id'))
     movie = relationship('Movie', back_populates = 'ticket')
+    showtime_id = Column(Integer, ForeignKey('showtimes.id'))
+    showtime = relationship('Showtime', back_populates = 'ticket')
 
     
 
