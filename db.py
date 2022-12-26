@@ -31,7 +31,7 @@ class User(Base):
 
     
 class Movie(Base):
-    tablename = 'movies'
+    __tablename__ = 'movies'
 
     id= Column(Integer, primary_key = True)
     title = Column(String, nullable = False)
@@ -41,16 +41,16 @@ class Movie(Base):
     ticket = relationship('Ticket', back_populates = 'movie')
 
 class Showtime(Base):
-    tablename = 'showtimes'
+    __tablename__ = 'showtimes'
 
-    id = Column(Integer, primary_key = True)
+    id= Column(Integer, primary_key = True)
     date = Column(String, nullable = False)
     movie_id = Column(Integer, ForeignKey('movies.id'))
     movie = relationship('Movie', back_populates = 'showtimes')
     ticket = relationship('Ticket', back_populates = 'showtime')
 
 class Ticket(Base):
-    tablename = 'tickets'
+    __tablename__ = 'tickets'
 
     id = Column(Integer, primary_key = True)
     id_movie = Column(Integer, nullable = False)
