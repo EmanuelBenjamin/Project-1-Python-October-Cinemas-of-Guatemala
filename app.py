@@ -17,6 +17,7 @@ if __name__=='__main__':
     app.register_blueprint(routes.users_main, url_prefix = '/CreateAcount')
     app.register_blueprint(routes.login_main, url_prefix = '/login')
     app.register_blueprint(routes.buy_ticket_main, url_prefix = '/buy_ticket')
-
+    app.register_blueprint(routes.ticket_info_main, url_prefix = '/ticketInfo')
+    
     app.register_error_handler(404, page_not_found)
     app.run()
