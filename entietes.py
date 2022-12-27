@@ -34,6 +34,20 @@ class Ticket():
         self.id_movie = id_movie
         self.seat_number = seat_number
         self.id_showtime = id_showtime
+
+class TicketInfo():
+    def __init__(self, id_movie, title = None, url=None, clasification=None, create_all=None):
+        self.id_movie = id_movie
+        self.title = title
+        self.url = url
+        self.classification = clasification
+    def to_JSON(self):
+        return{
+            'id': self.id_movie,
+            'title':self.title,
+            'url':self.url,
+            'classification':self.classification,
+        }
         
         
         
