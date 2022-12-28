@@ -17,8 +17,9 @@ movies_main = Blueprint('movie_blueprint', __name__)
 users_main = Blueprint('user_blueprint', __name__)
 login_main =  Blueprint('login_blueprint', __name__ )
 buy_ticket_main = Blueprint('buy_ticket', __name__)
+ticket_info_main = Blueprint('ticket_info_blueprint', __name__)
 
-@movies_main.route('/')
+@movies_main.route('/', methods = ['GET'])
 def get_movies():
     try:
         movies = MovieModel.get_movies()
