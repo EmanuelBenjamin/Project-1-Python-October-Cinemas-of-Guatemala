@@ -26,12 +26,9 @@ class User(Base):
     password = Column(String, nullable = False )
     email=Column(String, nullable = True)
     phone_number = Column(Integer,nullable = False )
-    ticket_id = Column(Integer, ForeignKey = 'tickets.id_tickets' )
+    ticket_id = Column(Integer, ForeignKey('tickets.id'))
     ticket = relationship('Ticket', back_populates = 'user')
-    tocken = relationship('Tocken', back_pupolate= 'user')
-
-    
-    tokens = relationship('token', back_populates='user')
+    tocken = relationship('Tocken', back_populates= 'user')
    
 
     
@@ -75,7 +72,7 @@ class Tocken(Base):
 
     id = Column(Integer, primary_key = True)
     tocken = Column(Integer, nullable=False, index = True)
-    user_id = Column(Integer, ForeignKey('user.id_movie'))
+    user_id = Column(Integer, ForeignKey('users.id'))
     user = relationship('Users', back_populates = 'tocken')
 
 
@@ -83,6 +80,8 @@ engine = create_engine('postgresql://postgres:12345@localhost/database')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
+
+
 
 
 
